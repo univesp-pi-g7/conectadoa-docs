@@ -37,14 +37,6 @@ A lista completa de ferramentas, dependências e configurações necessárias pa
 
 ➡️ **[Acessar requisitos de desenvolvimento](REQUISITOS_DEV.md)**
 
-Neste documento, você encontrará:
-
-* Requisitos gerais (Git, VS Code e extensões recomendadas)
-* Configuração do ambiente **Back-end** (Python, Docker, etc.)
-* Configuração do ambiente **Front-end** (Node.js, etc.)
-* Ferramentas de suporte (Postman, Insomnia, diagramas, entre outros)
-* Setup do **banco de dados PostgreSQL**
-
 Essa documentação garante que todos os desenvolvedores tenham um ambiente padronizado e funcional para trabalhar no projeto.
 
 ---
