@@ -63,3 +63,8 @@ Neste documento, você encontrará:
 * **Diagrama Entidade-Relacionamento (DER)**
 
 Essa documentação é essencial para entender a estrutura técnica do sistema, bem como as interações entre seus principais componentes.
+
+
+## **Como Contribuir**
+
+Para contribuir leia nosso guia [CONTRIBUTING.md](CONTRIBUTING.md).
