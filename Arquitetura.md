@@ -140,33 +140,50 @@ Representa a estrutura lógica do banco de dados PostgreSQL, com entidades, atri
 
 ```mermaid
 erDiagram
-    USUARIOS {
-        int id PK "AUTO_INCREMENT"
-        varchar nome "NOT NULL"
-        varchar email "UNIQUE, NOT NULL"
-        varchar senha_hash "NOT NULL"
-        varchar tipo_usuario "doador | admin"
-    }
+  USUARIOS ||--o{ DOACOES : "realiza"
+  ITENS ||--o{ DOACOES : "referenciado em"
+  ITENS ||--o{ NECESSIDADES : "publicado em"
 
-    ITENS {
-        int id PK "AUTO_INCREMENT"
-        varchar nome_item "NOT NULL"
-        varchar categoria "Alimento | Higiene | Limpeza | Vestuario"
-        varchar prioridade_status "alta | media | baixa | suficiente | bloqueado"
-    }
+  USUARIOS {
+    int id PK
+    varchar nome
+    varchar email
+    varchar senha_hash
+    varchar tipo_usuario "doador | admin"
+    timestamp criado_em
+  }
 
-    DOACOES {
-        int id PK "AUTO_INCREMENT"
-        int id_usuario FK "NOT NULL"
-        int id_item FK "NOT NULL"
-        int quantidade "NOT NULL"
-        date data_agendamento "NOT NULL"
-        time hora_agendamento "NOT NULL"
-        varchar status_doacao "agendada | aprovada | rejeitada | recebida"
-    }
+  ITENS {
+    int id PK
+    varchar nome_item
+    varchar categoria "Alimento | Higiene | Limpeza | Vestuario"
+    varchar prioridade_status "alta | media | baixa | suficiente | bloqueado"
+    int quantidade_atual
+    int quantidade_minima
+    timestamp atualizado_em
+  }
 
-    USUARIOS ||--o{ DOACOES : "realiza"
-    ITENS    ||--o{ DOACOES : "referenciado em"
+  NECESSIDADES {
+    int id PK
+    int id_item FK
+    int quantidade_solicitada
+    varchar status "aberta | atendida | cancelada"
+    text observacao
+    timestamp criado_em
+    timestamp atualizado_em
+  }
+
+  DOACOES {
+    int id PK
+    int id_usuario FK
+    int id_item FK
+    int quantidade
+    date data_agendamento
+    time hora_agendamento
+    varchar status_doacao "agendada | rejeitada | recebida"
+    text observacao
+    timestamp criado_em
+  }
 ```
 
 **Regras de negócio refletidas no schema:**
