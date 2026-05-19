@@ -141,7 +141,8 @@ Representa a estrutura lógica do banco de dados PostgreSQL, com entidades, atri
 ```mermaid
 erDiagram
   USUARIOS ||--o{ DOACOES : "realiza"
-  ITENS ||--o{ DOACOES : "referenciado em"
+  DOACOES ||--o{ DOACAO_ITENS : "contém"
+  ITENS ||--o{ DOACAO_ITENS : "referenciado em"
   ITENS ||--o{ NECESSIDADES : "publicado em"
 
   USUARIOS {
@@ -156,17 +157,15 @@ erDiagram
   ITENS {
     int id PK
     varchar nome_item
-    varchar categoria "Alimento | Higiene | Limpeza | Vestuario"
+    varchar categoria "Alimento | Higiene | Limpeza | Vestuario | Outros"
     varchar prioridade_status "alta | media | baixa | suficiente | bloqueado"
     int quantidade_atual
-    int quantidade_minima
     timestamp atualizado_em
   }
 
   NECESSIDADES {
     int id PK
     int id_item FK
-    int quantidade_solicitada
     varchar status "aberta | atendida | cancelada"
     text observacao
     timestamp criado_em
@@ -176,15 +175,21 @@ erDiagram
   DOACOES {
     int id PK
     int id_usuario FK
-    int id_item FK
-    int quantidade
     date data_agendamento
     time hora_agendamento
     varchar status_doacao "agendada | rejeitada | recebida"
     text observacao
     timestamp criado_em
   }
+
+  DOACAO_ITENS {
+    int id PK
+    int id_doacao FK
+    int id_item FK
+    int quantidade
+  }
 ```
+
 
 **Regras de negócio refletidas no schema:**
 
